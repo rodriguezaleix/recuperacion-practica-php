@@ -10,3 +10,9 @@ CREATE TABLE attractions (
     min_height_cm INT,
     category VARCHAR(50)
 );
+
+CREATE TABLE ticket_types (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL
+);

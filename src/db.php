@@ -21,4 +21,14 @@ class Database {
             throw new PDOException($e->getMessage(), (int)$e->getCode());
         }
     }
+
+    public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new Database();
+        }
+        return self::$instance->connection;
+    }
+
+    private function __clone() {}
 }
+?>

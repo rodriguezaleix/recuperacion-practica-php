@@ -1,3 +1,26 @@
+<?php
+session_start();
+require_once 'flash.php';
+
+if (isset($_SESSION['username'])) {
+    header("Location: buy.php");
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'] ?? '';
+    
+    if (empty($email)) {
+        set_flash('error', 'El email es obligatorio.');
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        set_flash('error', 'Formato de email inválido.');
+    } else {
+        $_SESSION['username'] = $email;
+        header("Location: buy.php");
+        exit;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,6 +40,8 @@
 
 <div class="login-container">
     <h2>Iniciar Sesión</h2>
+    
+    <?php mostrar_flash(); ?>
     
     <form id="login-form" action="login.php" method="POST">
         <label for="email-input">Correo Electrónico:</label>

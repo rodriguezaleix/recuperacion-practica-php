@@ -85,3 +85,39 @@ try {
 </div>
 </body>
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterSelect = document.getElementById('filter-maintenance');
+        const attractionList = document.getElementById('attraction-list');
+        const countSpan = document.getElementById('attraction-count');
+
+        filterSelect.addEventListener('change', function() {
+            const filterValue = this.value;
+            const cards = attractionList.querySelectorAll('.attraction-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const isMaintenance = card.getAttribute('data-maintenance') === 'true';
+                let show = false;
+
+                if (filterValue === 'all') {
+                    show = true;
+                } else if (filterValue === 'maintenance' && isMaintenance) {
+                    show = true;
+                } else if (filterValue === 'available' && !isMaintenance) {
+                    show = true;
+                }
+
+                if (show) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            countSpan.textContent = visibleCount;
+        });
+    });
+</script>

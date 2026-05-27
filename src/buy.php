@@ -1,3 +1,23 @@
+<?php
+session_start();
+require_once 'flash.php';
+require_once 'db.php';
+
+if (!isset($_SESSION['username'])) {
+    set_flash('error', 'Debes iniciar sesión para comprar entradas.');
+    header("Location: login.php");
+    exit;
+}
+
+$db = Database::getInstance();
+
+try {
+    $stmt = $db->query("SELECT id, name as label, price FROM ticket_types ORDER BY id ASC");
+    $ticketTypes = $stmt->fetchAll();
+} catch (Exception $e) {
+    die("Error al cargar entradas: " . $e->getMessage());
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,8 +40,35 @@
     </style>
 </head>
 <body>
+
 <div class="buy-container">
+    <div class="nav-links">
+        <a href="index.php">Inicio</a>
+        <a href="logout.php">Salir (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a>
+    </div>
+
     <h1>Comprar Entradas</h1>
+    
+    <?php mostrar_flash(); ?>
+
+    <form id="buy-form" action="buy.php" method="POST">
+        <?php foreach ($ticketTypes as $ticket): ?>
+            <?php $id = htmlspecialchars($ticket['id']); ?>
+            <div class="ticket-row" id="ticket-type-<?php echo $id; ?>">
+                <div class="ticket-info">
+                    <div class="ticket-name"><?php echo htmlspecialchars($ticket['label']); ?></div>
+                    <div class="ticket-price"><?php echo number_format($ticket['price'], 2); ?> €</div>
+                </div>
+                <div>
+                    <label for="quantity-<?php echo $id; ?>">Cantidad:</label>
+                    <input type="number" id="quantity-<?php echo $id; ?>" name="quantity[<?php echo $id; ?>]" min="0" max="100" value="0">
+                </div>
+            </div>
+        <?php endforeach; ?>
+        
+        <button type="submit">Continuar a Vista Previa</button>
+    </form>
 </div>
+
 </body>
 </html>

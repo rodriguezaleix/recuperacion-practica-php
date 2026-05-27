@@ -9,6 +9,9 @@ services:
       - db
     environment:
       - DATABASE_HOST=db
+      - MYSQL_DATABASE=taquilla_parque
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
 
   db:
     image: mariadb:10.6

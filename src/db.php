@@ -4,10 +4,10 @@ class Database {
     private $connection;
 
     private function __construct() {
-        $host = 'localhost';
-        $db   = 'taquilla_parque';
-        $user = 'root';
-        $pass = '';
+        $host = getenv('DATABASE_HOST') ?: 'localhost';
+        $db   = getenv('MYSQL_DATABASE') ?: 'taquilla_parque';
+        $user = getenv('MYSQL_USER') ?: 'root';
+        $pass = getenv('MYSQL_PASSWORD') ?: '';
         $charset = 'utf8mb4';
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
         $options = [

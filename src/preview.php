@@ -11,6 +11,29 @@ if (!isset($_SESSION['username'])) {
 $db = Database::getInstance();
 $email = $_SESSION['username'];
 
+if (isset($_POST['action']) && $_POST['action'] === 'finalize') {
+    $orderId = $_POST['order_id'];
+    $stmt = $db->prepare("UPDATE orders SET status = 'COMPLETED' WHERE id = ? AND buyer_email = ? AND status = 'PENDING'");
+    if ($stmt->execute([$orderId, $email])) {
+        header("Location: confirm.php?id=" . $orderId);
+        exit;
+    } else {
+        set_flash('error', 'No se pudo finalizar el pedido.');
+    }
+}
+
+if (isset($_POST['action']) && $_POST['action'] === 'cancel') {
+    $orderId = $_POST['order_id'];
+    $stmt = $db->prepare("UPDATE orders SET status = 'CANCELLED' WHERE id = ? AND buyer_email = ? AND status = 'PENDING'");
+    if ($stmt->execute([$orderId, $email])) {
+        set_flash('info', 'Pedido cancelado correctamente.');
+        header("Location: index.php");
+        exit;
+    } else {
+        set_flash('error', 'No se pudo cancelar el pedido.');
+    }
+}
+
 try {
     $stmtOrder = $db->prepare("SELECT id, total FROM orders WHERE buyer_email = ? AND status = 'PENDING' ORDER BY created_at DESC LIMIT 1");
     $stmtOrder->execute([$email]);
@@ -47,6 +70,12 @@ try {
         #cart-preview { margin-top: 20px; }
         .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
         .cart-total { font-size: 1.2em; font-weight: bold; text-align: right; padding: 20px 0; border-top: 2px solid #ccc; margin-top: 10px; color: #e74c3c; }
+        .actions { display: flex; justify-content: space-between; margin-top: 20px; }
+        button { padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; color: white; width: 48%; }
+        #finalize-button { background-color: #2ecc71; }
+        #finalize-button:hover { background-color: #27ae60; }
+        #cancel-button { background-color: #e74c3c; }
+        #cancel-button:hover { background-color: #c0392b; }
     </style>
 </head>
 <body>
@@ -67,6 +96,20 @@ try {
         <div class="cart-total">
             Total a pagar: <?php echo number_format($order['total'], 2); ?> €
         </div>
+    </div>
+
+    <div class="actions">
+        <form action="preview.php" method="POST" style="width: 48%;">
+            <input type="hidden" name="action" value="cancel">
+            <input type="hidden" name="order_id" value="<?php echo $orderId; ?>">
+            <button type="submit" id="cancel-button">Cancelar Pedido</button>
+        </form>
+
+        <form action="preview.php" method="POST" style="width: 48%;">
+            <input type="hidden" name="action" value="finalize">
+            <input type="hidden" name="order_id" value="<?php echo $orderId; ?>">
+            <button type="submit" id="finalize-button">Confirmar Compra</button>
+        </form>
     </div>
 </div>
 

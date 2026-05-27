@@ -20,13 +20,13 @@ if (!$orderId) {
     <meta charset="UTF-8">
     <title>Confirmación - DinoPark</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .confirm-container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; max-width: 500px; }
-        h1 { color: #2ecc71; margin-bottom: 20px; }
-        .order-number { font-size: 2em; font-weight: bold; color: #2c3e50; margin: 20px 0; padding: 15px; background: #ecf0f1; border-radius: 8px; border: 2px dashed #bdc3c7; }
-        p { color: #555; line-height: 1.6; }
-        .btn { display: inline-block; background-color: #3498db; color: white; padding: 12px 25px; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 20px; }
-        .btn:hover { background-color: #2980b9; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .confirm-container { background: white; padding: 40px 50px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; max-width: 500px; }
+        h1 { color: #2ecc71; margin-top: 0; margin-bottom: 20px; font-size: 2.2em; }
+        .order-number { font-size: 2.2em; font-weight: bold; color: #2c3e50; margin: 25px 0; padding: 20px; background: #f8f9fa; border-radius: 10px; border: 2px dashed #bdc3c7; }
+        p { color: #555; line-height: 1.6; font-size: 1.1em; }
+        .btn { display: inline-block; background-color: #3498db; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: bold; margin-top: 20px; transition: background 0.3s, transform 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn:hover { background-color: #2980b9; transform: translateY(-2px); }
     </style>
 </head>
 <body>

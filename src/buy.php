@@ -89,19 +89,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Comprar Entradas - DinoPark</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 20px; }
-        .buy-container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1 { color: #2c3e50; text-align: center; }
-        .ticket-row { border-bottom: 1px solid #eee; padding: 15px 0; display: flex; justify-content: space-between; align-items: center; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; padding: 40px 20px; color: #333; margin: 0; }
+        .buy-container { max-width: 650px; margin: auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h1 { color: #2c3e50; text-align: center; margin-top: 0; margin-bottom: 30px; font-size: 2em; }
+        .ticket-row { border-bottom: 1px solid #ecf0f1; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; }
         .ticket-row:last-child { border-bottom: none; }
         .ticket-info { flex-grow: 1; }
-        .ticket-name { font-weight: bold; font-size: 1.1em; color: #2980b9; }
-        .ticket-price { color: #e74c3c; font-weight: bold; }
-        input[type="number"] { width: 60px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; text-align: center; }
-        button { background-color: #2ecc71; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; margin-top: 20px; font-weight: bold; }
-        button:hover { background-color: #27ae60; }
-        .nav-links { text-align: right; margin-bottom: 20px; }
-        .nav-links a { margin-left: 10px; color: #3498db; text-decoration: none; }
+        .ticket-name { font-weight: bold; font-size: 1.2em; color: #2980b9; margin-bottom: 5px; }
+        .ticket-price { color: #e74c3c; font-weight: bold; font-size: 1.1em; }
+        label { font-weight: bold; color: #7f8c8d; margin-right: 10px; }
+        input[type="number"] { width: 70px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; text-align: center; font-size: 16px; outline: none; transition: border-color 0.3s; }
+        input[type="number"]:focus { border-color: #3498db; }
+        button { background-color: #2ecc71; color: white; padding: 15px 20px; border: none; border-radius: 6px; cursor: pointer; width: 100%; font-size: 18px; margin-top: 30px; font-weight: bold; transition: background 0.3s, transform 0.2s; box-shadow: 0 4px 6px rgba(46, 204, 113, 0.2); }
+        button:hover { background-color: #27ae60; transform: translateY(-2px); }
+        .nav-links { text-align: right; margin-bottom: 30px; border-bottom: 2px solid #ecf0f1; padding-bottom: 15px; }
+        .nav-links a { margin-left: 20px; color: #7f8c8d; text-decoration: none; font-weight: bold; transition: color 0.3s; }
+        .nav-links a:hover { color: #3498db; }
     </style>
 </head>
 <body>

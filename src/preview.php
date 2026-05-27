@@ -64,18 +64,18 @@ try {
     <meta charset="UTF-8">
     <title>Vista Previa del Pedido - DinoPark</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 20px; }
-        .preview-container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1 { color: #2c3e50; text-align: center; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; padding: 40px 20px; color: #333; margin: 0; }
+        .preview-container { max-width: 650px; margin: auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h1 { color: #2c3e50; text-align: center; margin-top: 0; margin-bottom: 30px; font-size: 2em; }
         #cart-preview { margin-top: 20px; }
-        .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
-        .cart-total { font-size: 1.2em; font-weight: bold; text-align: right; padding: 20px 0; border-top: 2px solid #ccc; margin-top: 10px; color: #e74c3c; }
-        .actions { display: flex; justify-content: space-between; margin-top: 20px; }
-        button { padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; color: white; width: 48%; }
+        .cart-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #ecf0f1; font-size: 1.1em; }
+        .cart-total { font-size: 1.4em; font-weight: bold; text-align: right; padding: 20px 0; border-top: 3px solid #ecf0f1; margin-top: 10px; color: #e74c3c; }
+        .actions { display: flex; justify-content: space-between; margin-top: 30px; }
+        button { padding: 15px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; color: white; width: 100%; transition: background 0.3s, transform 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         #finalize-button { background-color: #2ecc71; }
-        #finalize-button:hover { background-color: #27ae60; }
+        #finalize-button:hover { background-color: #27ae60; transform: translateY(-2px); }
         #cancel-button { background-color: #e74c3c; }
-        #cancel-button:hover { background-color: #c0392b; }
+        #cancel-button:hover { background-color: #c0392b; transform: translateY(-2px); }
     </style>
 </head>
 <body>

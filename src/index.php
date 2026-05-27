@@ -16,51 +16,62 @@ try {
     <meta charset="UTF-8">
     <title>Parque de Dinosaurios</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f9; color: #333; margin: 0; padding: 20px; }
-        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1 { color: #2c3e50; text-align: center; }
-        .hero { text-align: center; margin-bottom: 20px; }
-        #theme-image { max-width: 100%; height: auto; border-radius: 8px; }
-        .filter-container { margin-bottom: 20px; text-align: center; background: #ecf0f1; padding: 15px; border-radius: 8px; }
-        .attraction-card { border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 5px; }
-        .attraction-card h3 { margin-top: 0; color: #2980b9; }
-        .maintenance-true { background-color: #ffeaa7; border-color: #fdcb6e; }
-        .maintenance-false { background-color: #e8f8f5; border-color: #a3e4d7; }
-        .status-badge { font-weight: bold; padding: 5px 10px; border-radius: 3px; display: inline-block; margin-top: 10px; }
-        .status-maintenance { background: #e74c3c; color: white; }
-        .status-available { background: #2ecc71; color: white; }
-        .login-btn { display: inline-block; background: #3498db; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h1 { color: #2c3e50; margin: 0; }
+        header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ecf0f1; padding-bottom: 20px; margin-bottom: 20px; }
+        .hero { background: linear-gradient(135deg, #2c3e50, #3498db); padding: 40px 20px; border-radius: 10px; color: white; text-align: center; margin-bottom: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .hero h2 { margin: 0; font-size: 2.2em; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
+        .hero p { font-size: 1.1em; opacity: 0.9; margin-top: 10px; }
+        .filter-container { margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; background: #f8f9fa; padding: 15px 20px; border-radius: 8px; border: 1px solid #e9ecef; }
+        .filter-container select { padding: 8px 12px; border-radius: 5px; border: 1px solid #ccc; font-size: 16px; outline: none; }
+        #attraction-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .attraction-card { border: 1px solid #eee; padding: 20px; border-radius: 10px; transition: transform 0.2s, box-shadow 0.2s; background: white; }
+        .attraction-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .attraction-card h3 { margin-top: 0; color: #2980b9; font-size: 1.3em; margin-bottom: 10px; }
+        .maintenance-true { border-top: 4px solid #e74c3c; background: #fffaf9; }
+        .maintenance-false { border-top: 4px solid #2ecc71; }
+        .status-badge { font-weight: bold; padding: 6px 12px; border-radius: 20px; display: inline-block; margin-top: 15px; font-size: 0.9em; }
+        .status-maintenance { background: #fee2e2; color: #c0392b; }
+        .status-available { background: #dcfce7; color: #27ae60; }
+        .login-btn { display: inline-block; background: #3498db; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; transition: background 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .login-btn:hover { background: #2980b9; }
+        .nav-links span { color: #7f8c8d; margin-right: 15px; }
+        .nav-links a.logout { text-decoration: none; color: #e74c3c; font-weight: bold; margin-right: 15px; transition: color 0.3s; }
+        .nav-links a.logout:hover { color: #c0392b; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>Bienvenidos a DinoPark</h1>
-        <div style="text-align: right; margin-bottom: 20px;">
+        <h1>DinoPark 🦖</h1>
+        <div class="nav-links">
             <?php if(isset($_SESSION['username'])): ?>
                 <span>Hola, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
-                <a href="logout.php">Salir</a>
-                | <a href="buy.php" class="login-btn">Comprar Entradas</a>
+                <a href="logout.php" class="logout">Salir</a>
+                <a href="buy.php" class="login-btn">Comprar Entradas</a>
             <?php else: ?>
-                <a href="login.php" class="login-btn">Iniciar compra</a>
+                <a href="login.php" class="login-btn">Iniciar sesión</a>
             <?php endif; ?>
         </div>
     </header>
 
     <div class="hero">
-        <img id="theme-image" src="https://images.unsplash.com/photo-1518355601272-3cf7bbf8bf0a?auto=format&fit=crop&w=1000&q=80" alt="Parque de Dinosaurios">
+        <h2>Aventura Jurásica Te Espera</h2>
+        <p>Descubre el parque temático de dinosaurios más espectacular del mundo.</p>
     </div>
 
     <div class="filter-container">
-        <label for="filter-maintenance">Filtrar atracciones:</label>
-        <select id="filter-maintenance">
-            <option value="all">Todas</option>
-            <option value="maintenance">En mantenimiento</option>
-            <option value="available">Disponibles</option>
-        </select>
-        <p>Atracciones visibles: <span id="attraction-count"><?php echo count($attractions); ?></span></p>
+        <div>
+            <label for="filter-maintenance" style="font-weight: bold; color: #2c3e50;">Filtrar atracciones:</label>
+            <select id="filter-maintenance" style="margin-left: 10px;">
+                <option value="all">Ver Todas</option>
+                <option value="maintenance">En mantenimiento</option>
+                <option value="available">Disponibles</option>
+            </select>
+        </div>
+        <p style="margin: 0; color: #7f8c8d;">Visibles: <strong id="attraction-count" style="color: #2c3e50; font-size: 1.2em;"><?php echo count($attractions); ?></strong></p>
     </div>
 
     <div id="attraction-list">

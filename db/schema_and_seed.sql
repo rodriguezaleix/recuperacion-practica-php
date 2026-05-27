@@ -48,3 +48,9 @@ INSERT INTO attractions (name, description, maintenance, duration_minutes, min_h
 ('Nido del Velociraptor', 'Laberinto de terror con raptores acechando.', 0, 10, 120, 'Terror'),
 ('Tren Prehistórico', 'Tren panorámico que recorre todo el parque.', 0, 40, 0, 'Aventura Familiar'),
 ('Giro-esfera', 'Paseo seguro entre manadas de herbívoros.', 0, 20, 100, 'Aventura Familiar');
+
+-- Datos de prueba: 3 Tipos de ticket
+INSERT INTO ticket_types (name, price) VALUES
+('Entrada General', 45.00),
+('Entrada Infantil', 25.00),
+('Entrada Senior (+65)', 35.00);

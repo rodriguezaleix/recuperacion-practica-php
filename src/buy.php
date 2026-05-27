@@ -17,6 +17,71 @@ try {
 } catch (Exception $e) {
     die("Error al cargar entradas: " . $e->getMessage());
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $quantities = $_POST['quantity'] ?? [];
+    
+    $totalTickets = 0;
+    $validData = true;
+    $orderItemsData = [];
+    $totalPrice = 0;
+
+    foreach ($ticketTypes as $ticket) {
+        $id = $ticket['id'];
+        $qty = isset($quantities[$id]) ? (int)$quantities[$id] : 0;
+
+        if ($qty < 0 || $qty > 100) {
+            $validData = false;
+            break;
+        }
+
+        if ($qty > 0) {
+            $totalTickets += $qty;
+            $subtotal = $qty * $ticket['price'];
+            $totalPrice += $subtotal;
+            
+            $orderItemsData[] = [
+                'ticket_type_id' => $id,
+                'quantity' => $qty,
+                'unit_price' => $ticket['price']
+            ];
+        }
+    }
+
+    if (!$validData) {
+        set_flash('error', 'Las cantidades deben ser números entre 0 y 100.');
+    } elseif ($totalTickets === 0) {
+        set_flash('error', 'Debes seleccionar al menos una entrada para continuar.');
+    } else {
+        try {
+            $db->beginTransaction();
+
+            $stmtOrder = $db->prepare("INSERT INTO orders (buyer_email, total, status) VALUES (?, ?, 'PENDING')");
+            $stmtOrder->execute([$_SESSION['username'], $totalPrice]);
+            
+            $orderId = $db->lastInsertId();
+
+            $stmtItem = $db->prepare("INSERT INTO order_items (order_id, ticket_type_id, quantity, unit_price) VALUES (?, ?, ?, ?)");
+            
+            foreach ($orderItemsData as $item) {
+                $stmtItem->execute([
+                    $orderId, 
+                    $item['ticket_type_id'], 
+                    $item['quantity'], 
+                    $item['unit_price']
+                ]);
+            }
+
+            $db->commit();
+            header("Location: preview.php");
+            exit;
+
+        } catch (Exception $e) {
+            $db->rollBack();
+            set_flash('error', 'Error al procesar el pedido. Intenta de nuevo.');
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">

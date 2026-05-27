@@ -35,3 +35,16 @@ CREATE TABLE order_items (
     FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
     FOREIGN KEY (ticket_type_id) REFERENCES ticket_types(id) ON DELETE RESTRICT
 );
+
+-- Datos de prueba: 10 Atracciones de Dinosaurios
+INSERT INTO attractions (name, description, maintenance, duration_minutes, min_height_cm, category) VALUES
+('T-Rex Kingdom', 'Encuentro cara a cara con el Rey de los Dinosaurios.', 0, 15, 120, 'Aventura Extrema'),
+('Valle de los Braquiosaurios', 'Safari inolvidable a través del valle jurásico.', 1, 25, 90, 'Aventura Familiar'),
+('Rápidos del Dilophosaurus', 'Rápidos con efectos de agua y luces.', 0, 20, 100, 'Aventura Acuática'),
+('Vuelo del Pteranodon', 'Sobrevuela el parque en esta atracción colgante.', 0, 10, 110, 'Aventura Extrema'),
+('Cueva del Triceratops', 'Paseo tranquilo por las cuevas subterráneas.', 0, 15, 0, 'Aventura Familiar'),
+('Estampida Jurásica', 'Montaña rusa de alta velocidad por la selva.', 1, 5, 130, 'Aventura Extrema'),
+('Laboratorio Genético', 'Recorrido educativo por el centro de creación.', 0, 30, 0, 'Educativo'),
+('Nido del Velociraptor', 'Laberinto de terror con raptores acechando.', 0, 10, 120, 'Terror'),
+('Tren Prehistórico', 'Tren panorámico que recorre todo el parque.', 0, 40, 0, 'Aventura Familiar'),
+('Giro-esfera', 'Paseo seguro entre manadas de herbívoros.', 0, 20, 100, 'Aventura Familiar');

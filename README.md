@@ -28,6 +28,7 @@ $stmtOrder = $db->prepare("INSERT INTO orders (buyer_email, total, status) VALUE
 $stmtOrder->execute([$_SESSION['username'], $totalPrice]);
 ```
 
-### 4. Enlace al video demostración
-*Aquí se debe poner el enlace al vídeo de demostración mostrando el funcionamiento.*
-*(Enlace de YouTube o similar)*
+### 4. Enlaces de la entrega
+**Repositorio GitHub:** [https://github.com/rodriguezaleix/recuperacion-practica-php](https://github.com/rodriguezaleix/recuperacion-practica-php)
+
+**Vídeo Demostración:** [https://drive.google.com/file/d/1Ux9YrOwNZ1jdXwNBUkVjNqsEPMimVe_G/view?usp=sharing](https://drive.google.com/file/d/1Ux9YrOwNZ1jdXwNBUkVjNqsEPMimVe_G/view?usp=sharing)

@@ -32,7 +32,7 @@ if (!$orderId) {
 <body>
 
 <div class="confirm-container">
-    <h1>¡Compra Confirmada! 🎉</h1>
+    <h1>¡Compra Confirmada!</h1>
     <p>Gracias por tu compra. Tus entradas han sido procesadas correctamente y te esperan en la taquilla de DinoPark.</p>
     
     <p>Tu número de pedido es:</p>

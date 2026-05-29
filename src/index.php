@@ -45,7 +45,7 @@ try {
 
 <div class="container">
     <header>
-        <h1>DinoPark 🦖</h1>
+        <h1>DinoPark</h1>
         <div class="nav-links">
             <?php if(isset($_SESSION['username'])): ?>
                 <span>Hola, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
